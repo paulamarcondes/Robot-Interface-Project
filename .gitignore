@@ -1,0 +1,15 @@
+# Python cache folders
+__pycache__/
+*.pyc
+
+# Robot Framework logs (if you don't want to upload logs)
+# output.xml
+# log.html
+# report.html
+
+# Virtual environment folder (if you create one)
+venv/
+
+# OS files (optional)
+.DS_Store
+Thumbs.db
