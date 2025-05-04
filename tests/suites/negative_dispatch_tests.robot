@@ -1,17 +1,15 @@
 *** Settings ***
-Library        RequestsLibrary
-Library        Collections
+Documentation  This file contains the negative Test Cases for the Dispatch tests
 Resource       ../resources/dispatch_keywords.robot
+Resource       ../resources/dispatch_variables.robot
 
-
-*** Variables ***
-${BASE_URL}    http://localhost:5000
+Suite Setup     Create Fire Dispatch Session
+Suite Teardown  Session Exists    fire_dispatch
 
 
 *** Test Cases ***
 Send Incomplete Dispatch (Negative Test)
     [Documentation]    Try sending a dispatch without location and expect error
-    Create Fire Dispatch Session
-    ${bad_payload}=    Create Dictionary    incident_id=99999    type=Fire    priority=High
-    Run Keyword And Expect Error    HTTPError: 400 Client Error: BAD REQUEST*
-    ...    POST On Session    fire_dispatch    /api/dispatch    json=${bad_payload}
+    [Tags]    negative    dispatch    api
+    Create incomplete dispatch
+    Send the request and expect error

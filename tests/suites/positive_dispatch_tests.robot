@@ -1,18 +1,22 @@
 *** Settings ***
-Library        RequestsLibrary
-Library        Collections
+Documentation  This file contains the positive Test Cases for the Dispatch tests
 Resource       ../resources/dispatch_keywords.robot
+Resource       ../resources/dispatch_variables.robot
 
-
-*** Variables ***
-${BASE_URL}    http://localhost:5000
+Suite Setup     Create Fire Dispatch Session
+Suite Teardown  Session Exists    fire_dispatch
 
 
 *** Test Cases ***
 Send Emergency Dispatch
-    [Documentation]    Send a dispatch to the mock server and check the response
-    Create Fire Dispatch Session
-    ${response}=    Send Dispatch    12345    MainStreet    Accident    High
-    Should Be Equal As Strings    ${response.status_code}    200
-    Dictionary Should Contain Key    ${response.json()}    status
-    Should Be Equal As Strings    ${response.json()['status']}    Received
+    [Documentation]    Send dispatch with predefined data and validate response
+    [Tags]    dispatch    api
+    Send Emergency Dispatch
+    Check Dispatch Response
+
+Send Random Dispatch
+    [Documentation]    Genarate random dispatch data, send it, and validate response
+    [Tags]    dispatch    api
+    Generate Random Dispatch
+    Send Random Dispatch
+    Check Dispatch Response
