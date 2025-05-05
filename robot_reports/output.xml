@@ -1,103 +1,1461 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.2.2 (Python 3.13.3 on win32)" generated="2025-05-04T17:49:18.143155" rpa="false" schemaversion="5">
-<suite id="s1" name="Negative Dispatch Tests" source="C:\Projects\RobotInterfaceProject\tests\suites\negative_dispatch_tests.robot">
+<robot generator="Robot 7.2.2 (Python 3.13.3 on win32)" generated="2025-05-04T23:54:51.221405" rpa="false" schemaversion="5">
+<suite id="s1" name="Positive Dispatch Tests" source="C:\Projects\RobotInterfaceProject\tests\suites\positive_dispatch_tests.robot">
 <kw name="Create Fire Dispatch Session" owner="dispatch_keywords" type="SETUP">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2025-05-04T17:49:18.570609" level="INFO">Creating Session using : alias=fire_dispatch, url=http://localhost:5000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2025-05-04T23:54:51.837406" level="INFO">Creating Session using : alias=fire_dispatch, url=http://localhost:5000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
 <arg>fire_dispatch</arg>
 <arg>${BASE_URL}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2025-05-04T17:49:18.570479" elapsed="0.000269"/>
+<status status="PASS" start="2025-05-04T23:54:51.837252" elapsed="0.000310"/>
 </kw>
-<status status="PASS" start="2025-05-04T17:49:18.569985" elapsed="0.000823"/>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:54:51.837795" level="INFO">Session created with base URL: http://localhost:5000</msg>
+<arg>Session created with base URL: ${BASE_URL}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:54:51.837676" elapsed="0.000154"/>
 </kw>
-<test id="s1-t1" name="Send Incomplete Dispatch (Negative Test)" line="12">
-<kw name="Create incomplete dispatch" owner="dispatch_keywords">
+<status status="PASS" start="2025-05-04T23:54:51.836666" elapsed="0.001214"/>
+</kw>
+<test id="s1-t1" name="Emergency Dispatch" line="11">
+<kw name="Send Emergency Dispatch" owner="dispatch_keywords">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-05-04T17:49:18.571558" level="INFO">${bad_payload} = {'incident_id': '99999', 'type': 'Fire', 'priority': 'High'}</msg>
-<var>${bad_payload}</var>
-<arg>incident_id=99999</arg>
-<arg>type=Fire</arg>
+<msg time="2025-05-04T23:54:51.838688" level="INFO">${payload} = {'incident_id': '12345', 'location': 'MainStreet', 'type': 'Accident', 'priority': 'High'}</msg>
+<var>${payload}</var>
+<arg>incident_id=12345</arg>
+<arg>location=MainStreet</arg>
+<arg>type=Accident</arg>
 <arg>priority=High</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-05-04T17:49:18.571388" elapsed="0.000188"/>
+<status status="PASS" start="2025-05-04T23:54:51.838488" elapsed="0.000222"/>
 </kw>
-<return>
-<value>${bad_payload}</value>
-<status status="PASS" start="2025-05-04T17:49:18.571612" elapsed="0.000029"/>
-</return>
-<status status="PASS" start="2025-05-04T17:49:18.571243" elapsed="0.000462"/>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:54:51.839082" level="INFO">Sending emergency dispatch with payload: {'incident_id': '12345', 'location': 'MainStreet', 'type': 'Accident', 'priority': 'High'}</msg>
+<arg>Sending emergency dispatch with payload: ${payload}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:54:51.838929" elapsed="0.000186"/>
 </kw>
-<kw name="Send the request and expect error" owner="dispatch_keywords">
-<kw name="Create incomplete dispatch" owner="dispatch_keywords">
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-05-04T17:49:18.572284" level="INFO">${bad_payload} = {'incident_id': '99999', 'type': 'Fire', 'priority': 'High'}</msg>
-<var>${bad_payload}</var>
-<arg>incident_id=99999</arg>
-<arg>type=Fire</arg>
-<arg>priority=High</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-05-04T17:49:18.572188" elapsed="0.000113"/>
-</kw>
-<return>
-<value>${bad_payload}</value>
-<status status="PASS" start="2025-05-04T17:49:18.572330" elapsed="0.000022"/>
-</return>
-<msg time="2025-05-04T17:49:18.572412" level="INFO">${bad_payload} = {'incident_id': '99999', 'type': 'Fire', 'priority': 'High'}</msg>
-<var>${bad_payload}</var>
-<status status="PASS" start="2025-05-04T17:49:18.572083" elapsed="0.000343"/>
-</kw>
-<kw name="Run Keyword And Expect Error" owner="BuiltIn">
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2025-05-04T17:49:20.606961" level="INFO">POST Request : url=http://localhost:5000/api/dispatch 
+<msg time="2025-05-04T23:54:53.872385" level="INFO">POST Request : url=http://localhost:5000/api/dispatch 
  path_url=/api/dispatch 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '60', 'Content-Type': 'application/json'} 
- body=b'{"incident_id": "99999", "type": "Fire", "priority": "High"}' 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '90', 'Content-Type': 'application/json'} 
+ body=b'{"incident_id": "12345", "location": "MainStreet", "type": "Accident", "priority": "High"}' 
  </msg>
-<msg time="2025-05-04T17:49:20.607130" level="INFO">POST Response : url=http://localhost:5000/api/dispatch 
- status=400, reason=BAD REQUEST 
- headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Sun, 04 May 2025 20:49:20 GMT', 'Content-Type': 'application/json', 'Content-Length': '55', 'Connection': 'close'} 
+<msg time="2025-05-04T23:54:53.872502" level="INFO">POST Response : url=http://localhost:5000/api/dispatch 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Mon, 05 May 2025 02:54:53 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
  body={
-  "message": "Missing fields",
-  "status": "Error"
+  "status": "Received"
 }
  
  </msg>
-<msg time="2025-05-04T17:49:20.607355" level="FAIL">HTTPError: 400 Client Error: BAD REQUEST for url: http://localhost:5000/api/dispatch</msg>
+<msg time="2025-05-04T23:54:53.872630" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
 <arg>fire_dispatch</arg>
 <arg>/api/dispatch</arg>
-<arg>json=${bad_payload}</arg>
+<arg>json=${payload}</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="FAIL" start="2025-05-04T17:49:18.572550" elapsed="2.038127">HTTPError: 400 Client Error: BAD REQUEST for url: http://localhost:5000/api/dispatch</status>
+<status status="PASS" start="2025-05-04T23:54:51.839190" elapsed="2.033467"/>
 </kw>
-<arg>HTTPError: 400*</arg>
-<arg>POST On Session</arg>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-05-04T23:54:53.873058" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<arg>${response}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-05-04T23:54:53.872839" elapsed="0.000264"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:54:53.873949" level="INFO">Received response with status code: 200</msg>
+<arg>Received response with status code: ${response.status_code}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:54:53.873219" elapsed="0.000800"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-05-04T23:54:53.874111" elapsed="0.000060"/>
+</return>
+<status status="PASS" start="2025-05-04T23:54:51.838313" elapsed="2.036189"/>
+</kw>
+<kw name="Check Dispatch Response" owner="dispatch_keywords">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-05-04T23:54:53.876155" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-05-04T23:54:53.875683" elapsed="0.000554"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-05-04T23:54:53.876562" level="INFO">${json} = {'status': 'Received'}</msg>
+<var>${json}</var>
+<arg>${response}</arg>
+<arg>json</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-05-04T23:54:53.876364" elapsed="0.000227"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:54:53.876865" level="INFO">Full response JSON: {'status': 'Received'}</msg>
+<arg>Full response JSON: ${json}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:54:53.876719" elapsed="0.000197"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${json['status']}</arg>
+<arg>Received</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-05-04T23:54:53.877040" elapsed="0.000582"/>
+</kw>
+<kw name="Return From Keyword" owner="BuiltIn">
+<msg time="2025-05-04T23:54:53.877847" level="INFO">Returning from the enclosing user keyword.</msg>
+<arg>${json}</arg>
+<doc>Returns from the enclosing user keyword.</doc>
+<status status="PASS" start="2025-05-04T23:54:53.877768" elapsed="0.000152"/>
+</kw>
+<status status="PASS" start="2025-05-04T23:54:53.875392" elapsed="0.002641"/>
+</kw>
+<doc>Send dispatch with predefined data and validate response</doc>
+<tag>api</tag>
+<tag>dispatch</tag>
+<status status="PASS" start="2025-05-04T23:54:51.837924" elapsed="2.047841"/>
+</test>
+<test id="s1-t2" name="Random Dispatch" line="17">
+<kw name="Generate Random Dispatch" owner="dispatch_keywords">
+<kw name="Random Number" owner="FakerLibrary">
+<msg time="2025-05-04T23:54:53.888369" level="INFO">${incident_id} = 181972</msg>
+<var>${incident_id}</var>
+<arg>digits=6</arg>
+<doc>Generate a random integer according to the following rules:</doc>
+<status status="PASS" start="2025-05-04T23:54:53.888107" elapsed="0.000288"/>
+</kw>
+<kw name="City" owner="FakerLibrary">
+<msg time="2025-05-04T23:54:53.888791" level="INFO">${location} = Grosston</msg>
+<var>${location}</var>
+<doc>:example: 'Sashabury'</doc>
+<status status="PASS" start="2025-05-04T23:54:53.888487" elapsed="0.000325"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-04T23:54:53.889272" level="INFO">${type} = Accident</msg>
+<var>${type}</var>
+<arg>('Accident', 'Fire', 'Medical', 'Rescue', 'Theft')</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-04T23:54:53.888901" elapsed="0.000396"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-04T23:54:53.889584" level="INFO">${priority} = High</msg>
+<var>${priority}</var>
+<arg>('High', 'Medium', 'Low', 'Critical')</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-04T23:54:53.889383" elapsed="0.000222"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-05-04T23:54:53.889951" level="INFO">${payload} = {'incident_id': 181972, 'location': 'Grosston', 'type': 'Accident', 'priority': 'High'}</msg>
+<var>${payload}</var>
+<arg>incident_id=${incident_id}</arg>
+<arg>location=${location}</arg>
+<arg>type=${type}</arg>
+<arg>priority=${priority}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-05-04T23:54:53.889694" elapsed="0.000275"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:54:53.890457" level="INFO">Generated random dispatch payload: {'incident_id': 181972, 'location': 'Grosston', 'type': 'Accident', 'priority': 'High'}</msg>
+<arg>Generated random dispatch payload: ${payload}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:54:53.890310" elapsed="0.000180"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-05-04T23:54:53.890695" level="INFO">${payload} = {'incident_id': 181972, 'location': 'Grosston', 'type': 'Accident', 'priority': 'High'}</msg>
+<arg>${payload}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-05-04T23:54:53.890569" elapsed="0.000156"/>
+</kw>
+<return>
+<value>${payload}</value>
+<status status="PASS" start="2025-05-04T23:54:53.890761" elapsed="0.000034"/>
+</return>
+<status status="PASS" start="2025-05-04T23:54:53.887894" elapsed="0.002972"/>
+</kw>
+<kw name="Send Random Dispatch" owner="dispatch_keywords">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-05-04T23:54:55.927151" level="INFO">POST Request : url=http://localhost:5000/api/dispatch 
+ path_url=/api/dispatch 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '87', 'Content-Type': 'application/json'} 
+ body=b'{"incident_id": 181972, "location": "Grosston", "type": "Accident", "priority": "High"}' 
+ </msg>
+<msg time="2025-05-04T23:54:55.927281" level="INFO">POST Response : url=http://localhost:5000/api/dispatch 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Mon, 05 May 2025 02:54:55 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
+ body={
+  "status": "Received"
+}
+ 
+ </msg>
+<msg time="2025-05-04T23:54:55.927465" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
 <arg>fire_dispatch</arg>
 <arg>/api/dispatch</arg>
-<arg>json=${bad_payload}</arg>
-<doc>Runs the keyword and checks that the expected error occurred.</doc>
-<status status="PASS" start="2025-05-04T17:49:18.572478" elapsed="2.038589"/>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-05-04T23:54:53.891245" elapsed="2.036264"/>
 </kw>
-<status status="PASS" start="2025-05-04T17:49:18.571946" elapsed="2.039246"/>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-05-04T23:54:55.928423" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<arg>${response}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-05-04T23:54:55.927776" elapsed="0.000745"/>
 </kw>
-<doc>Try sending a dispatch without location and expect error</doc>
-<status status="PASS" start="2025-05-04T17:49:18.570850" elapsed="2.040902"/>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:54:55.929718" level="INFO">Received response with status code: 200</msg>
+<arg>Received response with status code: ${response.status_code}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:54:55.928743" elapsed="0.001236"/>
+</kw>
+<status status="PASS" start="2025-05-04T23:54:53.891082" elapsed="2.039022"/>
+</kw>
+<kw name="Check Dispatch Response" owner="dispatch_keywords">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-05-04T23:54:55.933378" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-05-04T23:54:55.932679" elapsed="0.000791"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-05-04T23:54:55.933964" level="INFO">${json} = {'status': 'Received'}</msg>
+<var>${json}</var>
+<arg>${response}</arg>
+<arg>json</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-05-04T23:54:55.933644" elapsed="0.000365"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:54:55.934356" level="INFO">Full response JSON: {'status': 'Received'}</msg>
+<arg>Full response JSON: ${json}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:54:55.934181" elapsed="0.000229"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${json['status']}</arg>
+<arg>Received</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-05-04T23:54:55.934535" elapsed="0.000594"/>
+</kw>
+<kw name="Return From Keyword" owner="BuiltIn">
+<msg time="2025-05-04T23:54:55.935310" level="INFO">Returning from the enclosing user keyword.</msg>
+<arg>${json}</arg>
+<doc>Returns from the enclosing user keyword.</doc>
+<status status="PASS" start="2025-05-04T23:54:55.935249" elapsed="0.000122"/>
+</kw>
+<status status="PASS" start="2025-05-04T23:54:55.932266" elapsed="0.003193"/>
+</kw>
+<doc>Generate random dispatch data, send it, and validate response</doc>
+<tag>api</tag>
+<tag>dispatch</tag>
+<tag>random</tag>
+<status status="PASS" start="2025-05-04T23:54:53.887426" elapsed="2.048233"/>
+</test>
+<test id="s1-t3" name="Multiple Dispatches by Priority" line="24">
+<kw name="Send Multiple Dispatches" owner="dispatch_keywords">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-05-04T23:54:55.937031" level="INFO">${responses} = []</msg>
+<var>${responses}</var>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-05-04T23:54:55.936935" elapsed="0.000117"/>
+</kw>
+<for flavor="IN RANGE">
+<iter>
+<kw name="Generate Random Dispatch" owner="dispatch_keywords">
+<kw name="Random Number" owner="FakerLibrary">
+<msg time="2025-05-04T23:54:55.938108" level="INFO">${incident_id} = 35582</msg>
+<var>${incident_id}</var>
+<arg>digits=6</arg>
+<doc>Generate a random integer according to the following rules:</doc>
+<status status="PASS" start="2025-05-04T23:54:55.937933" elapsed="0.000200"/>
+</kw>
+<kw name="City" owner="FakerLibrary">
+<msg time="2025-05-04T23:54:55.938563" level="INFO">${location} = South Mariaside</msg>
+<var>${location}</var>
+<doc>:example: 'Sashabury'</doc>
+<status status="PASS" start="2025-05-04T23:54:55.938203" elapsed="0.000386"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-04T23:54:55.938880" level="INFO">${type} = Accident</msg>
+<var>${type}</var>
+<arg>('Accident', 'Fire', 'Medical', 'Rescue', 'Theft')</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-04T23:54:55.938678" elapsed="0.000220"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-04T23:54:55.939100" level="INFO">${priority} = Medium</msg>
+<var>${priority}</var>
+<arg>('High', 'Medium', 'Low', 'Critical')</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-04T23:54:55.938968" elapsed="0.000148"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-05-04T23:54:55.939373" level="INFO">${payload} = {'incident_id': 35582, 'location': 'South Mariaside', 'type': 'Accident', 'priority': 'Medium'}</msg>
+<var>${payload}</var>
+<arg>incident_id=${incident_id}</arg>
+<arg>location=${location}</arg>
+<arg>type=${type}</arg>
+<arg>priority=${priority}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-05-04T23:54:55.939185" elapsed="0.000204"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:54:55.939529" level="INFO">Generated random dispatch payload: {'incident_id': 35582, 'location': 'South Mariaside', 'type': 'Accident', 'priority': 'Medium'}</msg>
+<arg>Generated random dispatch payload: ${payload}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:54:55.939455" elapsed="0.000099"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-05-04T23:54:55.939723" level="INFO">${payload} = {'incident_id': 35582, 'location': 'South Mariaside', 'type': 'Accident', 'priority': 'Medium'}</msg>
+<arg>${payload}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-05-04T23:54:55.939618" elapsed="0.000239"/>
+</kw>
+<return>
+<value>${payload}</value>
+<status status="PASS" start="2025-05-04T23:54:55.939892" elapsed="0.000025"/>
+</return>
+<status status="PASS" start="2025-05-04T23:54:55.937769" elapsed="0.002212"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-05-04T23:54:57.967193" level="INFO">POST Request : url=http://localhost:5000/api/dispatch 
+ path_url=/api/dispatch 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '95', 'Content-Type': 'application/json'} 
+ body=b'{"incident_id": 35582, "location": "South Mariaside", "type": "Accident", "priority": "Medium"}' 
+ </msg>
+<msg time="2025-05-04T23:54:57.967306" level="INFO">POST Response : url=http://localhost:5000/api/dispatch 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Mon, 05 May 2025 02:54:57 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
+ body={
+  "status": "Received"
+}
+ 
+ </msg>
+<msg time="2025-05-04T23:54:57.967448" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>fire_dispatch</arg>
+<arg>/api/dispatch</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-05-04T23:54:55.940043" elapsed="2.027438"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${responses}</arg>
+<arg>${response}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-05-04T23:54:57.967669" elapsed="0.000224"/>
+</kw>
+<var name="${i}">0</var>
+<status status="PASS" start="2025-05-04T23:54:55.937256" elapsed="2.030695"/>
+</iter>
+<iter>
+<kw name="Generate Random Dispatch" owner="dispatch_keywords">
+<kw name="Random Number" owner="FakerLibrary">
+<msg time="2025-05-04T23:54:57.969089" level="INFO">${incident_id} = 784666</msg>
+<var>${incident_id}</var>
+<arg>digits=6</arg>
+<doc>Generate a random integer according to the following rules:</doc>
+<status status="PASS" start="2025-05-04T23:54:57.968640" elapsed="0.000494"/>
+</kw>
+<kw name="City" owner="FakerLibrary">
+<msg time="2025-05-04T23:54:57.969696" level="INFO">${location} = Smithview</msg>
+<var>${location}</var>
+<doc>:example: 'Sashabury'</doc>
+<status status="PASS" start="2025-05-04T23:54:57.969287" elapsed="0.000452"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-04T23:54:57.970188" level="INFO">${type} = Fire</msg>
+<var>${type}</var>
+<arg>('Accident', 'Fire', 'Medical', 'Rescue', 'Theft')</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-04T23:54:57.969912" elapsed="0.000300"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-04T23:54:57.970490" level="INFO">${priority} = Critical</msg>
+<var>${priority}</var>
+<arg>('High', 'Medium', 'Low', 'Critical')</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-04T23:54:57.970304" elapsed="0.000208"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-05-04T23:54:57.970848" level="INFO">${payload} = {'incident_id': 784666, 'location': 'Smithview', 'type': 'Fire', 'priority': 'Critical'}</msg>
+<var>${payload}</var>
+<arg>incident_id=${incident_id}</arg>
+<arg>location=${location}</arg>
+<arg>type=${type}</arg>
+<arg>priority=${priority}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-05-04T23:54:57.970606" elapsed="0.000262"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:54:57.971053" level="INFO">Generated random dispatch payload: {'incident_id': 784666, 'location': 'Smithview', 'type': 'Fire', 'priority': 'Critical'}</msg>
+<arg>Generated random dispatch payload: ${payload}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:54:57.970953" elapsed="0.000132"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-05-04T23:54:57.971295" level="INFO">${payload} = {'incident_id': 784666, 'location': 'Smithview', 'type': 'Fire', 'priority': 'Critical'}</msg>
+<arg>${payload}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-05-04T23:54:57.971168" elapsed="0.000156"/>
+</kw>
+<return>
+<value>${payload}</value>
+<status status="PASS" start="2025-05-04T23:54:57.971358" elapsed="0.000028"/>
+</return>
+<status status="PASS" start="2025-05-04T23:54:57.968337" elapsed="0.003120"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-05-04T23:55:00.070624" level="INFO">POST Request : url=http://localhost:5000/api/dispatch 
+ path_url=/api/dispatch 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '88', 'Content-Type': 'application/json'} 
+ body=b'{"incident_id": 784666, "location": "Smithview", "type": "Fire", "priority": "Critical"}' 
+ </msg>
+<msg time="2025-05-04T23:55:00.070715" level="INFO">POST Response : url=http://localhost:5000/api/dispatch 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Mon, 05 May 2025 02:55:00 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
+ body={
+  "status": "Received"
+}
+ 
+ </msg>
+<msg time="2025-05-04T23:55:00.070834" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>fire_dispatch</arg>
+<arg>/api/dispatch</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-05-04T23:54:57.971528" elapsed="2.099334"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${responses}</arg>
+<arg>${response}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-05-04T23:55:00.071013" elapsed="0.000167"/>
+</kw>
+<var name="${i}">1</var>
+<status status="PASS" start="2025-05-04T23:54:57.968136" elapsed="2.103099"/>
+</iter>
+<iter>
+<kw name="Generate Random Dispatch" owner="dispatch_keywords">
+<kw name="Random Number" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:00.071945" level="INFO">${incident_id} = 783384</msg>
+<var>${incident_id}</var>
+<arg>digits=6</arg>
+<doc>Generate a random integer according to the following rules:</doc>
+<status status="PASS" start="2025-05-04T23:55:00.071731" elapsed="0.000238"/>
+</kw>
+<kw name="City" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:00.072398" level="INFO">${location} = Port Brianmouth</msg>
+<var>${location}</var>
+<doc>:example: 'Sashabury'</doc>
+<status status="PASS" start="2025-05-04T23:55:00.072062" elapsed="0.000369"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:00.072858" level="INFO">${type} = Rescue</msg>
+<var>${type}</var>
+<arg>('Accident', 'Fire', 'Medical', 'Rescue', 'Theft')</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-04T23:55:00.072553" elapsed="0.000353"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:00.073267" level="INFO">${priority} = High</msg>
+<var>${priority}</var>
+<arg>('High', 'Medium', 'Low', 'Critical')</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-04T23:55:00.073060" elapsed="0.000232"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-05-04T23:55:00.073725" level="INFO">${payload} = {'incident_id': 783384, 'location': 'Port Brianmouth', 'type': 'Rescue', 'priority': 'High'}</msg>
+<var>${payload}</var>
+<arg>incident_id=${incident_id}</arg>
+<arg>location=${location}</arg>
+<arg>type=${type}</arg>
+<arg>priority=${priority}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-05-04T23:55:00.073397" elapsed="0.000438"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:55:00.074096" level="INFO">Generated random dispatch payload: {'incident_id': 783384, 'location': 'Port Brianmouth', 'type': 'Rescue', 'priority': 'High'}</msg>
+<arg>Generated random dispatch payload: ${payload}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:55:00.073969" elapsed="0.000167"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-05-04T23:55:00.074395" level="INFO">${payload} = {'incident_id': 783384, 'location': 'Port Brianmouth', 'type': 'Rescue', 'priority': 'High'}</msg>
+<arg>${payload}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-05-04T23:55:00.074242" elapsed="0.000185"/>
+</kw>
+<return>
+<value>${payload}</value>
+<status status="PASS" start="2025-05-04T23:55:00.074469" elapsed="0.000031"/>
+</return>
+<status status="PASS" start="2025-05-04T23:55:00.071522" elapsed="0.003077"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-05-04T23:55:02.118952" level="INFO">POST Request : url=http://localhost:5000/api/dispatch 
+ path_url=/api/dispatch 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '92', 'Content-Type': 'application/json'} 
+ body=b'{"incident_id": 783384, "location": "Port Brianmouth", "type": "Rescue", "priority": "High"}' 
+ </msg>
+<msg time="2025-05-04T23:55:02.119011" level="INFO">POST Response : url=http://localhost:5000/api/dispatch 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Mon, 05 May 2025 02:55:02 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
+ body={
+  "status": "Received"
+}
+ 
+ </msg>
+<msg time="2025-05-04T23:55:02.119102" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>fire_dispatch</arg>
+<arg>/api/dispatch</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-05-04T23:55:00.074693" elapsed="2.044427"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${responses}</arg>
+<arg>${response}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-05-04T23:55:02.119235" elapsed="0.000124"/>
+</kw>
+<var name="${i}">2</var>
+<status status="PASS" start="2025-05-04T23:55:00.071369" elapsed="2.048022"/>
+</iter>
+<iter>
+<kw name="Generate Random Dispatch" owner="dispatch_keywords">
+<kw name="Random Number" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:02.119897" level="INFO">${incident_id} = 407450</msg>
+<var>${incident_id}</var>
+<arg>digits=6</arg>
+<doc>Generate a random integer according to the following rules:</doc>
+<status status="PASS" start="2025-05-04T23:55:02.119735" elapsed="0.000182"/>
+</kw>
+<kw name="City" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:02.120170" level="INFO">${location} = Jacksonbury</msg>
+<var>${location}</var>
+<doc>:example: 'Sashabury'</doc>
+<status status="PASS" start="2025-05-04T23:55:02.119984" elapsed="0.000204"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:02.120418" level="INFO">${type} = Theft</msg>
+<var>${type}</var>
+<arg>('Accident', 'Fire', 'Medical', 'Rescue', 'Theft')</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-04T23:55:02.120253" elapsed="0.000181"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:02.120674" level="INFO">${priority} = High</msg>
+<var>${priority}</var>
+<arg>('High', 'Medium', 'Low', 'Critical')</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-04T23:55:02.120506" elapsed="0.000185"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-05-04T23:55:02.121028" level="INFO">${payload} = {'incident_id': 407450, 'location': 'Jacksonbury', 'type': 'Theft', 'priority': 'High'}</msg>
+<var>${payload}</var>
+<arg>incident_id=${incident_id}</arg>
+<arg>location=${location}</arg>
+<arg>type=${type}</arg>
+<arg>priority=${priority}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-05-04T23:55:02.120769" elapsed="0.000283"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:55:02.121227" level="INFO">Generated random dispatch payload: {'incident_id': 407450, 'location': 'Jacksonbury', 'type': 'Theft', 'priority': 'High'}</msg>
+<arg>Generated random dispatch payload: ${payload}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:55:02.121136" elapsed="0.000120"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-05-04T23:55:02.121426" level="INFO">${payload} = {'incident_id': 407450, 'location': 'Jacksonbury', 'type': 'Theft', 'priority': 'High'}</msg>
+<arg>${payload}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-05-04T23:55:02.121322" elapsed="0.000128"/>
+</kw>
+<return>
+<value>${payload}</value>
+<status status="PASS" start="2025-05-04T23:55:02.121485" elapsed="0.000026"/>
+</return>
+<status status="PASS" start="2025-05-04T23:55:02.119578" elapsed="0.001994"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-05-04T23:55:04.157266" level="INFO">POST Request : url=http://localhost:5000/api/dispatch 
+ path_url=/api/dispatch 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '87', 'Content-Type': 'application/json'} 
+ body=b'{"incident_id": 407450, "location": "Jacksonbury", "type": "Theft", "priority": "High"}' 
+ </msg>
+<msg time="2025-05-04T23:55:04.157369" level="INFO">POST Response : url=http://localhost:5000/api/dispatch 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Mon, 05 May 2025 02:55:04 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
+ body={
+  "status": "Received"
+}
+ 
+ </msg>
+<msg time="2025-05-04T23:55:04.157509" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>fire_dispatch</arg>
+<arg>/api/dispatch</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-05-04T23:55:02.121630" elapsed="2.035911"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${responses}</arg>
+<arg>${response}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-05-04T23:55:04.157733" elapsed="0.000218"/>
+</kw>
+<var name="${i}">3</var>
+<status status="PASS" start="2025-05-04T23:55:02.119471" elapsed="2.038538"/>
+</iter>
+<iter>
+<kw name="Generate Random Dispatch" owner="dispatch_keywords">
+<kw name="Random Number" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:04.159048" level="INFO">${incident_id} = 682785</msg>
+<var>${incident_id}</var>
+<arg>digits=6</arg>
+<doc>Generate a random integer according to the following rules:</doc>
+<status status="PASS" start="2025-05-04T23:55:04.158651" elapsed="0.000445"/>
+</kw>
+<kw name="City" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:04.159455" level="INFO">${location} = Franciscoport</msg>
+<var>${location}</var>
+<doc>:example: 'Sashabury'</doc>
+<status status="PASS" start="2025-05-04T23:55:04.159224" elapsed="0.000254"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:04.159764" level="INFO">${type} = Theft</msg>
+<var>${type}</var>
+<arg>('Accident', 'Fire', 'Medical', 'Rescue', 'Theft')</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-04T23:55:04.159563" elapsed="0.000337"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:04.160164" level="INFO">${priority} = Low</msg>
+<var>${priority}</var>
+<arg>('High', 'Medium', 'Low', 'Critical')</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-04T23:55:04.159988" elapsed="0.000197"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-05-04T23:55:04.160504" level="INFO">${payload} = {'incident_id': 682785, 'location': 'Franciscoport', 'type': 'Theft', 'priority': 'Low'}</msg>
+<var>${payload}</var>
+<arg>incident_id=${incident_id}</arg>
+<arg>location=${location}</arg>
+<arg>type=${type}</arg>
+<arg>priority=${priority}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-05-04T23:55:04.160275" elapsed="0.000248"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:55:04.160696" level="INFO">Generated random dispatch payload: {'incident_id': 682785, 'location': 'Franciscoport', 'type': 'Theft', 'priority': 'Low'}</msg>
+<arg>Generated random dispatch payload: ${payload}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:55:04.160601" elapsed="0.000129"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-05-04T23:55:04.160933" level="INFO">${payload} = {'incident_id': 682785, 'location': 'Franciscoport', 'type': 'Theft', 'priority': 'Low'}</msg>
+<arg>${payload}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-05-04T23:55:04.160802" elapsed="0.000162"/>
+</kw>
+<return>
+<value>${payload}</value>
+<status status="PASS" start="2025-05-04T23:55:04.161190" elapsed="0.000092"/>
+</return>
+<status status="PASS" start="2025-05-04T23:55:04.158355" elapsed="0.003044"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-05-04T23:55:06.176488" level="INFO">POST Request : url=http://localhost:5000/api/dispatch 
+ path_url=/api/dispatch 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '88', 'Content-Type': 'application/json'} 
+ body=b'{"incident_id": 682785, "location": "Franciscoport", "type": "Theft", "priority": "Low"}' 
+ </msg>
+<msg time="2025-05-04T23:55:06.176598" level="INFO">POST Response : url=http://localhost:5000/api/dispatch 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Mon, 05 May 2025 02:55:06 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
+ body={
+  "status": "Received"
+}
+ 
+ </msg>
+<msg time="2025-05-04T23:55:06.176740" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>fire_dispatch</arg>
+<arg>/api/dispatch</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-05-04T23:55:04.161492" elapsed="2.015277"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${responses}</arg>
+<arg>${response}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-05-04T23:55:06.176967" elapsed="0.000206"/>
+</kw>
+<var name="${i}">4</var>
+<status status="PASS" start="2025-05-04T23:55:04.158155" elapsed="2.019070"/>
+</iter>
+<var>${i}</var>
+<value>${count}</value>
+<status status="PASS" start="2025-05-04T23:54:55.937108" elapsed="10.240159"/>
+</for>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-05-04T23:55:06.177958" level="INFO">${responses} = [&lt;Response [200]&gt;, &lt;Response [200]&gt;, &lt;Response [200]&gt;, &lt;Response [200]&gt;, &lt;Response [200]&gt;]</msg>
+<arg>${responses}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-05-04T23:55:06.177421" elapsed="0.000597"/>
+</kw>
+<status status="PASS" start="2025-05-04T23:54:55.936732" elapsed="10.241362"/>
+</kw>
+<kw name="Validate Based on Priority" owner="dispatch_keywords">
+<kw name="Check Dispatch Response" owner="dispatch_keywords">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-05-04T23:55:06.180345" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-05-04T23:55:06.179885" elapsed="0.000522"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-05-04T23:55:06.180695" level="INFO">${json} = {'status': 'Received'}</msg>
+<var>${json}</var>
+<arg>${response}</arg>
+<arg>json</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-05-04T23:55:06.180528" elapsed="0.000191"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:55:06.180943" level="INFO">Full response JSON: {'status': 'Received'}</msg>
+<arg>Full response JSON: ${json}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:55:06.180826" elapsed="0.000177"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${json['status']}</arg>
+<arg>Received</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-05-04T23:55:06.181104" elapsed="0.000495"/>
+</kw>
+<kw name="Return From Keyword" owner="BuiltIn">
+<msg time="2025-05-04T23:55:06.181925" level="INFO">Returning from the enclosing user keyword.</msg>
+<arg>${json}</arg>
+<doc>Returns from the enclosing user keyword.</doc>
+<status status="PASS" start="2025-05-04T23:55:06.181805" elapsed="0.000202"/>
+</kw>
+<msg time="2025-05-04T23:55:06.182155" level="INFO">${json} = {'status': 'Received'}</msg>
+<var>${json}</var>
+<status status="PASS" start="2025-05-04T23:55:06.179650" elapsed="0.002528"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${json['status']}</arg>
+<arg>Received</arg>
+<arg>msg=Expected status 'Received' but got '${json['status']}'</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-05-04T23:55:06.182281" elapsed="0.000760"/>
+</kw>
+<kw name="Log Priority Message" owner="dispatch_keywords">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:55:06.183882" level="INFO">Low priority validated: 682785</msg>
+<arg>${priority} priority validated: ${incident_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:55:06.183778" elapsed="0.000139"/>
+</kw>
+<arg>${payload['priority']}</arg>
+<arg>${payload['incident_id']}</arg>
+<status status="PASS" start="2025-05-04T23:55:06.183181" elapsed="0.000776"/>
+</kw>
+<status status="PASS" start="2025-05-04T23:55:06.179338" elapsed="0.004647"/>
+</kw>
+<doc>Generate and send dispatches with different priorities and validate response</doc>
+<tag>api</tag>
+<tag>dispatch</tag>
+<tag>multiple</tag>
+<status status="PASS" start="2025-05-04T23:54:55.936089" elapsed="10.248072"/>
+</test>
+<test id="s1-t4" name="Validate Response Includes Required Fields" line="30">
+<kw name="Send Multiple Dispatches" owner="dispatch_keywords">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-05-04T23:55:06.185311" level="INFO">${responses} = []</msg>
+<var>${responses}</var>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-05-04T23:55:06.185228" elapsed="0.000107"/>
+</kw>
+<for flavor="IN RANGE">
+<iter>
+<kw name="Generate Random Dispatch" owner="dispatch_keywords">
+<kw name="Random Number" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:06.185911" level="INFO">${incident_id} = 325156</msg>
+<var>${incident_id}</var>
+<arg>digits=6</arg>
+<doc>Generate a random integer according to the following rules:</doc>
+<status status="PASS" start="2025-05-04T23:55:06.185744" elapsed="0.000265"/>
+</kw>
+<kw name="City" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:06.186271" level="INFO">${location} = West Robertbury</msg>
+<var>${location}</var>
+<doc>:example: 'Sashabury'</doc>
+<status status="PASS" start="2025-05-04T23:55:06.186084" elapsed="0.000203"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:06.186515" level="INFO">${type} = Fire</msg>
+<var>${type}</var>
+<arg>('Accident', 'Fire', 'Medical', 'Rescue', 'Theft')</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-04T23:55:06.186348" elapsed="0.000182"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:06.186753" level="INFO">${priority} = Low</msg>
+<var>${priority}</var>
+<arg>('High', 'Medium', 'Low', 'Critical')</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-04T23:55:06.186609" elapsed="0.000167"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-05-04T23:55:06.187775" level="INFO">${payload} = {'incident_id': 325156, 'location': 'West Robertbury', 'type': 'Fire', 'priority': 'Low'}</msg>
+<var>${payload}</var>
+<arg>incident_id=${incident_id}</arg>
+<arg>location=${location}</arg>
+<arg>type=${type}</arg>
+<arg>priority=${priority}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-05-04T23:55:06.186878" elapsed="0.000928"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:55:06.188005" level="INFO">Generated random dispatch payload: {'incident_id': 325156, 'location': 'West Robertbury', 'type': 'Fire', 'priority': 'Low'}</msg>
+<arg>Generated random dispatch payload: ${payload}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:55:06.187914" elapsed="0.000120"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-05-04T23:55:06.188217" level="INFO">${payload} = {'incident_id': 325156, 'location': 'West Robertbury', 'type': 'Fire', 'priority': 'Low'}</msg>
+<arg>${payload}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-05-04T23:55:06.188107" elapsed="0.000134"/>
+</kw>
+<return>
+<value>${payload}</value>
+<status status="PASS" start="2025-05-04T23:55:06.188273" elapsed="0.000029"/>
+</return>
+<status status="PASS" start="2025-05-04T23:55:06.185608" elapsed="0.002754"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-05-04T23:55:08.223122" level="INFO">POST Request : url=http://localhost:5000/api/dispatch 
+ path_url=/api/dispatch 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '89', 'Content-Type': 'application/json'} 
+ body=b'{"incident_id": 325156, "location": "West Robertbury", "type": "Fire", "priority": "Low"}' 
+ </msg>
+<msg time="2025-05-04T23:55:08.223204" level="INFO">POST Response : url=http://localhost:5000/api/dispatch 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Mon, 05 May 2025 02:55:08 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
+ body={
+  "status": "Received"
+}
+ 
+ </msg>
+<msg time="2025-05-04T23:55:08.223322" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>fire_dispatch</arg>
+<arg>/api/dispatch</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-05-04T23:55:06.188421" elapsed="2.034927"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${responses}</arg>
+<arg>${response}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-05-04T23:55:08.223498" elapsed="0.000181"/>
+</kw>
+<var name="${i}">0</var>
+<status status="PASS" start="2025-05-04T23:55:06.185519" elapsed="2.038202"/>
+</iter>
+<iter>
+<kw name="Generate Random Dispatch" owner="dispatch_keywords">
+<kw name="Random Number" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:08.224433" level="INFO">${incident_id} = 549583</msg>
+<var>${incident_id}</var>
+<arg>digits=6</arg>
+<doc>Generate a random integer according to the following rules:</doc>
+<status status="PASS" start="2025-05-04T23:55:08.224196" elapsed="0.000270"/>
+</kw>
+<kw name="City" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:08.224896" level="INFO">${location} = Lake Benjaminmouth</msg>
+<var>${location}</var>
+<doc>:example: 'Sashabury'</doc>
+<status status="PASS" start="2025-05-04T23:55:08.224627" elapsed="0.000296"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:08.225249" level="INFO">${type} = Fire</msg>
+<var>${type}</var>
+<arg>('Accident', 'Fire', 'Medical', 'Rescue', 'Theft')</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-04T23:55:08.225019" elapsed="0.000249"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:08.225477" level="INFO">${priority} = High</msg>
+<var>${priority}</var>
+<arg>('High', 'Medium', 'Low', 'Critical')</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-04T23:55:08.225340" elapsed="0.000152"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-05-04T23:55:08.225750" level="INFO">${payload} = {'incident_id': 549583, 'location': 'Lake Benjaminmouth', 'type': 'Fire', 'priority': 'High'}</msg>
+<var>${payload}</var>
+<arg>incident_id=${incident_id}</arg>
+<arg>location=${location}</arg>
+<arg>type=${type}</arg>
+<arg>priority=${priority}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-05-04T23:55:08.225562" elapsed="0.000204"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:55:08.225908" level="INFO">Generated random dispatch payload: {'incident_id': 549583, 'location': 'Lake Benjaminmouth', 'type': 'Fire', 'priority': 'High'}</msg>
+<arg>Generated random dispatch payload: ${payload}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:55:08.225831" elapsed="0.000103"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-05-04T23:55:08.226092" level="INFO">${payload} = {'incident_id': 549583, 'location': 'Lake Benjaminmouth', 'type': 'Fire', 'priority': 'High'}</msg>
+<arg>${payload}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-05-04T23:55:08.225993" elapsed="0.000121"/>
+</kw>
+<return>
+<value>${payload}</value>
+<status status="PASS" start="2025-05-04T23:55:08.226142" elapsed="0.000024"/>
+</return>
+<status status="PASS" start="2025-05-04T23:55:08.223983" elapsed="0.002245"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-05-04T23:55:10.252264" level="INFO">POST Request : url=http://localhost:5000/api/dispatch 
+ path_url=/api/dispatch 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '93', 'Content-Type': 'application/json'} 
+ body=b'{"incident_id": 549583, "location": "Lake Benjaminmouth", "type": "Fire", "priority": "High"}' 
+ </msg>
+<msg time="2025-05-04T23:55:10.252411" level="INFO">POST Response : url=http://localhost:5000/api/dispatch 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Mon, 05 May 2025 02:55:10 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
+ body={
+  "status": "Received"
+}
+ 
+ </msg>
+<msg time="2025-05-04T23:55:10.252604" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>fire_dispatch</arg>
+<arg>/api/dispatch</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-05-04T23:55:08.226287" elapsed="2.026597"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${responses}</arg>
+<arg>${response}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-05-04T23:55:10.253282" elapsed="0.000477"/>
+</kw>
+<var name="${i}">1</var>
+<status status="PASS" start="2025-05-04T23:55:08.223831" elapsed="2.030011"/>
+</iter>
+<iter>
+<kw name="Generate Random Dispatch" owner="dispatch_keywords">
+<kw name="Random Number" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:10.254913" level="INFO">${incident_id} = 851639</msg>
+<var>${incident_id}</var>
+<arg>digits=6</arg>
+<doc>Generate a random integer according to the following rules:</doc>
+<status status="PASS" start="2025-05-04T23:55:10.254573" elapsed="0.000382"/>
+</kw>
+<kw name="City" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:10.255730" level="INFO">${location} = Cordovamouth</msg>
+<var>${location}</var>
+<doc>:example: 'Sashabury'</doc>
+<status status="PASS" start="2025-05-04T23:55:10.255110" elapsed="0.000680"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:10.256453" level="INFO">${type} = Rescue</msg>
+<var>${type}</var>
+<arg>('Accident', 'Fire', 'Medical', 'Rescue', 'Theft')</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-04T23:55:10.255979" elapsed="0.000518"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:10.256901" level="INFO">${priority} = Critical</msg>
+<var>${priority}</var>
+<arg>('High', 'Medium', 'Low', 'Critical')</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-04T23:55:10.256648" elapsed="0.000281"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-05-04T23:55:10.257443" level="INFO">${payload} = {'incident_id': 851639, 'location': 'Cordovamouth', 'type': 'Rescue', 'priority': 'Critical'}</msg>
+<var>${payload}</var>
+<arg>incident_id=${incident_id}</arg>
+<arg>location=${location}</arg>
+<arg>type=${type}</arg>
+<arg>priority=${priority}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-05-04T23:55:10.257073" elapsed="0.000401"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:55:10.257901" level="INFO">Generated random dispatch payload: {'incident_id': 851639, 'location': 'Cordovamouth', 'type': 'Rescue', 'priority': 'Critical'}</msg>
+<arg>Generated random dispatch payload: ${payload}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:55:10.257631" elapsed="0.000356"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-05-04T23:55:10.258330" level="INFO">${payload} = {'incident_id': 851639, 'location': 'Cordovamouth', 'type': 'Rescue', 'priority': 'Critical'}</msg>
+<arg>${payload}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-05-04T23:55:10.258124" elapsed="0.000248"/>
+</kw>
+<return>
+<value>${payload}</value>
+<status status="PASS" start="2025-05-04T23:55:10.258426" elapsed="0.000046"/>
+</return>
+<status status="PASS" start="2025-05-04T23:55:10.254255" elapsed="0.004334"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-05-04T23:55:12.309647" level="INFO">POST Request : url=http://localhost:5000/api/dispatch 
+ path_url=/api/dispatch 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '93', 'Content-Type': 'application/json'} 
+ body=b'{"incident_id": 851639, "location": "Cordovamouth", "type": "Rescue", "priority": "Critical"}' 
+ </msg>
+<msg time="2025-05-04T23:55:12.309789" level="INFO">POST Response : url=http://localhost:5000/api/dispatch 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Mon, 05 May 2025 02:55:12 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
+ body={
+  "status": "Received"
+}
+ 
+ </msg>
+<msg time="2025-05-04T23:55:12.309981" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>fire_dispatch</arg>
+<arg>/api/dispatch</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-05-04T23:55:10.258693" elapsed="2.051328"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${responses}</arg>
+<arg>${response}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-05-04T23:55:12.310281" elapsed="0.000785"/>
+</kw>
+<var name="${i}">2</var>
+<status status="PASS" start="2025-05-04T23:55:10.254029" elapsed="2.057131"/>
+</iter>
+<iter>
+<kw name="Generate Random Dispatch" owner="dispatch_keywords">
+<kw name="Random Number" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:12.312544" level="INFO">${incident_id} = 136853</msg>
+<var>${incident_id}</var>
+<arg>digits=6</arg>
+<doc>Generate a random integer according to the following rules:</doc>
+<status status="PASS" start="2025-05-04T23:55:12.312117" elapsed="0.000475"/>
+</kw>
+<kw name="City" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:12.313116" level="INFO">${location} = Jamesmouth</msg>
+<var>${location}</var>
+<doc>:example: 'Sashabury'</doc>
+<status status="PASS" start="2025-05-04T23:55:12.312755" elapsed="0.000401"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:12.313786" level="INFO">${type} = Medical</msg>
+<var>${type}</var>
+<arg>('Accident', 'Fire', 'Medical', 'Rescue', 'Theft')</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-04T23:55:12.313312" elapsed="0.000526"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:12.314395" level="INFO">${priority} = Critical</msg>
+<var>${priority}</var>
+<arg>('High', 'Medium', 'Low', 'Critical')</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-04T23:55:12.314054" elapsed="0.000379"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-05-04T23:55:12.314978" level="INFO">${payload} = {'incident_id': 136853, 'location': 'Jamesmouth', 'type': 'Medical', 'priority': 'Critical'}</msg>
+<var>${payload}</var>
+<arg>incident_id=${incident_id}</arg>
+<arg>location=${location}</arg>
+<arg>type=${type}</arg>
+<arg>priority=${priority}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-05-04T23:55:12.314582" elapsed="0.000430"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:55:12.315318" level="INFO">Generated random dispatch payload: {'incident_id': 136853, 'location': 'Jamesmouth', 'type': 'Medical', 'priority': 'Critical'}</msg>
+<arg>Generated random dispatch payload: ${payload}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:55:12.315164" elapsed="0.000203"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-05-04T23:55:12.315698" level="INFO">${payload} = {'incident_id': 136853, 'location': 'Jamesmouth', 'type': 'Medical', 'priority': 'Critical'}</msg>
+<arg>${payload}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-05-04T23:55:12.315496" elapsed="0.000244"/>
+</kw>
+<return>
+<value>${payload}</value>
+<status status="PASS" start="2025-05-04T23:55:12.315794" elapsed="0.000045"/>
+</return>
+<status status="PASS" start="2025-05-04T23:55:12.311735" elapsed="0.004213"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-05-04T23:55:14.349044" level="INFO">POST Request : url=http://localhost:5000/api/dispatch 
+ path_url=/api/dispatch 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '92', 'Content-Type': 'application/json'} 
+ body=b'{"incident_id": 136853, "location": "Jamesmouth", "type": "Medical", "priority": "Critical"}' 
+ </msg>
+<msg time="2025-05-04T23:55:14.349225" level="INFO">POST Response : url=http://localhost:5000/api/dispatch 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Mon, 05 May 2025 02:55:14 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
+ body={
+  "status": "Received"
+}
+ 
+ </msg>
+<msg time="2025-05-04T23:55:14.349322" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>fire_dispatch</arg>
+<arg>/api/dispatch</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-05-04T23:55:12.316080" elapsed="2.033261"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${responses}</arg>
+<arg>${response}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-05-04T23:55:14.349459" elapsed="0.000136"/>
+</kw>
+<var name="${i}">3</var>
+<status status="PASS" start="2025-05-04T23:55:12.311400" elapsed="2.038225"/>
+</iter>
+<iter>
+<kw name="Generate Random Dispatch" owner="dispatch_keywords">
+<kw name="Random Number" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:14.350123" level="INFO">${incident_id} = 16405</msg>
+<var>${incident_id}</var>
+<arg>digits=6</arg>
+<doc>Generate a random integer according to the following rules:</doc>
+<status status="PASS" start="2025-05-04T23:55:14.349963" elapsed="0.000179"/>
+</kw>
+<kw name="City" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:14.350374" level="INFO">${location} = East Ryanborough</msg>
+<var>${location}</var>
+<doc>:example: 'Sashabury'</doc>
+<status status="PASS" start="2025-05-04T23:55:14.350210" elapsed="0.000181"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:14.350621" level="INFO">${type} = Theft</msg>
+<var>${type}</var>
+<arg>('Accident', 'Fire', 'Medical', 'Rescue', 'Theft')</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-04T23:55:14.350456" elapsed="0.000181"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-04T23:55:14.350845" level="INFO">${priority} = Medium</msg>
+<var>${priority}</var>
+<arg>('High', 'Medium', 'Low', 'Critical')</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-04T23:55:14.350699" elapsed="0.000198"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-05-04T23:55:14.351238" level="INFO">${payload} = {'incident_id': 16405, 'location': 'East Ryanborough', 'type': 'Theft', 'priority': 'Medium'}</msg>
+<var>${payload}</var>
+<arg>incident_id=${incident_id}</arg>
+<arg>location=${location}</arg>
+<arg>type=${type}</arg>
+<arg>priority=${priority}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-05-04T23:55:14.351009" elapsed="0.000249"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:55:14.351425" level="INFO">Generated random dispatch payload: {'incident_id': 16405, 'location': 'East Ryanborough', 'type': 'Theft', 'priority': 'Medium'}</msg>
+<arg>Generated random dispatch payload: ${payload}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:55:14.351336" elapsed="0.000116"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-05-04T23:55:14.351628" level="INFO">${payload} = {'incident_id': 16405, 'location': 'East Ryanborough', 'type': 'Theft', 'priority': 'Medium'}</msg>
+<arg>${payload}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-05-04T23:55:14.351516" elapsed="0.000135"/>
+</kw>
+<return>
+<value>${payload}</value>
+<status status="PASS" start="2025-05-04T23:55:14.351680" elapsed="0.000025"/>
+</return>
+<status status="PASS" start="2025-05-04T23:55:14.349813" elapsed="0.001951"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-05-04T23:55:16.384779" level="INFO">POST Request : url=http://localhost:5000/api/dispatch 
+ path_url=/api/dispatch 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '93', 'Content-Type': 'application/json'} 
+ body=b'{"incident_id": 16405, "location": "East Ryanborough", "type": "Theft", "priority": "Medium"}' 
+ </msg>
+<msg time="2025-05-04T23:55:16.384896" level="INFO">POST Response : url=http://localhost:5000/api/dispatch 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Mon, 05 May 2025 02:55:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
+ body={
+  "status": "Received"
+}
+ 
+ </msg>
+<msg time="2025-05-04T23:55:16.385052" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>fire_dispatch</arg>
+<arg>/api/dispatch</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-05-04T23:55:14.351820" elapsed="2.033269"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${responses}</arg>
+<arg>${response}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-05-04T23:55:16.385295" elapsed="0.000234"/>
+</kw>
+<var name="${i}">4</var>
+<status status="PASS" start="2025-05-04T23:55:14.349708" elapsed="2.035880"/>
+</iter>
+<var>${i}</var>
+<value>${count}</value>
+<status status="PASS" start="2025-05-04T23:55:06.185391" elapsed="10.200246"/>
+</for>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-05-04T23:55:16.386087" level="INFO">${responses} = [&lt;Response [200]&gt;, &lt;Response [200]&gt;, &lt;Response [200]&gt;, &lt;Response [200]&gt;, &lt;Response [200]&gt;]</msg>
+<arg>${responses}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-05-04T23:55:16.385847" elapsed="0.000292"/>
+</kw>
+<status status="PASS" start="2025-05-04T23:55:06.185038" elapsed="10.201173"/>
+</kw>
+<kw name="Check Responses for Required Fields" owner="dispatch_keywords">
+<for flavor="IN">
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-05-04T23:55:16.387504" level="INFO">${json} = {'status': 'Received'}</msg>
+<var>${json}</var>
+<arg>${response}</arg>
+<arg>json</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-05-04T23:55:16.387364" elapsed="0.000164"/>
+</kw>
+<kw name="Log Full Response JSON" owner="dispatch_keywords">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:55:16.387988" level="INFO">Full API Response: {'status': 'Received'}</msg>
+<arg>Full API Response: ${json}</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:55:16.387837" elapsed="0.000204"/>
+</kw>
+<arg>${json}</arg>
+<status status="PASS" start="2025-05-04T23:55:16.387632" elapsed="0.000469"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${json}</arg>
+<arg>status</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-05-04T23:55:16.388199" elapsed="0.000153"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:55:16.388532" level="INFO">Response contains expected field: status</msg>
+<arg>Response contains expected field: status</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:55:16.388466" elapsed="0.000095"/>
+</kw>
+<var name="${response}">&lt;Response [200]&gt;</var>
+<status status="PASS" start="2025-05-04T23:55:16.387285" elapsed="0.001361"/>
+</iter>
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-05-04T23:55:16.388910" level="INFO">${json} = {'status': 'Received'}</msg>
+<var>${json}</var>
+<arg>${response}</arg>
+<arg>json</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-05-04T23:55:16.388797" elapsed="0.000131"/>
+</kw>
+<kw name="Log Full Response JSON" owner="dispatch_keywords">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:55:16.389264" level="INFO">Full API Response: {'status': 'Received'}</msg>
+<arg>Full API Response: ${json}</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:55:16.389170" elapsed="0.000122"/>
+</kw>
+<arg>${json}</arg>
+<status status="PASS" start="2025-05-04T23:55:16.389015" elapsed="0.000314"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${json}</arg>
+<arg>status</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-05-04T23:55:16.389386" elapsed="0.000084"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:55:16.389588" level="INFO">Response contains expected field: status</msg>
+<arg>Response contains expected field: status</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:55:16.389534" elapsed="0.000083"/>
+</kw>
+<var name="${response}">&lt;Response [200]&gt;</var>
+<status status="PASS" start="2025-05-04T23:55:16.388734" elapsed="0.000905"/>
+</iter>
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-05-04T23:55:16.389857" level="INFO">${json} = {'status': 'Received'}</msg>
+<var>${json}</var>
+<arg>${response}</arg>
+<arg>json</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-05-04T23:55:16.389762" elapsed="0.000111"/>
+</kw>
+<kw name="Log Full Response JSON" owner="dispatch_keywords">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:55:16.390172" level="INFO">Full API Response: {'status': 'Received'}</msg>
+<arg>Full API Response: ${json}</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:55:16.390089" elapsed="0.000108"/>
+</kw>
+<arg>${json}</arg>
+<status status="PASS" start="2025-05-04T23:55:16.389947" elapsed="0.000285"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${json}</arg>
+<arg>status</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-05-04T23:55:16.390281" elapsed="0.000071"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:55:16.390460" level="INFO">Response contains expected field: status</msg>
+<arg>Response contains expected field: status</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:55:16.390416" elapsed="0.000067"/>
+</kw>
+<var name="${response}">&lt;Response [200]&gt;</var>
+<status status="PASS" start="2025-05-04T23:55:16.389711" elapsed="0.000791"/>
+</iter>
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-05-04T23:55:16.390683" level="INFO">${json} = {'status': 'Received'}</msg>
+<var>${json}</var>
+<arg>${response}</arg>
+<arg>json</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-05-04T23:55:16.390603" elapsed="0.000093"/>
+</kw>
+<kw name="Log Full Response JSON" owner="dispatch_keywords">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:55:16.390972" level="INFO">Full API Response: {'status': 'Received'}</msg>
+<arg>Full API Response: ${json}</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:55:16.390894" elapsed="0.000100"/>
+</kw>
+<arg>${json}</arg>
+<status status="PASS" start="2025-05-04T23:55:16.390765" elapsed="0.000259"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${json}</arg>
+<arg>status</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-05-04T23:55:16.391069" elapsed="0.000071"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:55:16.391235" level="INFO">Response contains expected field: status</msg>
+<arg>Response contains expected field: status</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:55:16.391193" elapsed="0.000063"/>
+</kw>
+<var name="${response}">&lt;Response [200]&gt;</var>
+<status status="PASS" start="2025-05-04T23:55:16.390561" elapsed="0.000713"/>
+</iter>
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-05-04T23:55:16.391468" level="INFO">${json} = {'status': 'Received'}</msg>
+<var>${json}</var>
+<arg>${response}</arg>
+<arg>json</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-05-04T23:55:16.391378" elapsed="0.000104"/>
+</kw>
+<kw name="Log Full Response JSON" owner="dispatch_keywords">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:55:16.391757" level="INFO">Full API Response: {'status': 'Received'}</msg>
+<arg>Full API Response: ${json}</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:55:16.391681" elapsed="0.000098"/>
+</kw>
+<arg>${json}</arg>
+<status status="PASS" start="2025-05-04T23:55:16.391550" elapsed="0.000259"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${json}</arg>
+<arg>status</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-05-04T23:55:16.391854" elapsed="0.000066"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-04T23:55:16.392011" level="INFO">Response contains expected field: status</msg>
+<arg>Response contains expected field: status</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-04T23:55:16.391971" elapsed="0.000063"/>
+</kw>
+<var name="${response}">&lt;Response [200]&gt;</var>
+<status status="PASS" start="2025-05-04T23:55:16.391331" elapsed="0.000720"/>
+</iter>
+<var>${response}</var>
+<value>@{responses}</value>
+<status status="PASS" start="2025-05-04T23:55:16.387123" elapsed="0.004946"/>
+</for>
+<status status="PASS" start="2025-05-04T23:55:16.386896" elapsed="0.005204"/>
+</kw>
+<doc>Ensure all responses contain mandatory fields like status, id, and timestamp</doc>
+<tag>api</tag>
+<tag>dispatch</tag>
+<tag>multiple</tag>
+<tag>validation</tag>
+<status status="PASS" start="2025-05-04T23:55:06.184498" elapsed="10.207732"/>
 </test>
 <kw name="Session Exists" owner="RequestsLibrary" type="TEARDOWN">
 <arg>fire_dispatch</arg>
 <doc>Return True if the session has been already created</doc>
-<status status="PASS" start="2025-05-04T17:49:20.612859" elapsed="0.000124"/>
+<status status="PASS" start="2025-05-04T23:55:16.392792" elapsed="0.000125"/>
 </kw>
-<status status="PASS" start="2025-05-04T17:49:18.144052" elapsed="2.468958"/>
+<doc>This file contains the positive Test Cases for the Dispatch tests</doc>
+<status status="PASS" start="2025-05-04T23:54:51.222557" elapsed="25.170399"/>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0" skip="0">All Tests</stat>
+<stat pass="4" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
+<stat pass="4" fail="0" skip="0">api</stat>
+<stat pass="4" fail="0" skip="0">dispatch</stat>
+<stat pass="2" fail="0" skip="0">multiple</stat>
+<stat pass="1" fail="0" skip="0">random</stat>
+<stat pass="1" fail="0" skip="0">validation</stat>
 </tag>
 <suite>
-<stat name="Negative Dispatch Tests" id="s1" pass="1" fail="0" skip="0">Negative Dispatch Tests</stat>
+<stat name="Positive Dispatch Tests" id="s1" pass="4" fail="0" skip="0">Positive Dispatch Tests</stat>
 </suite>
 </statistics>
 <errors>
