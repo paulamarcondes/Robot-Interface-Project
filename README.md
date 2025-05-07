@@ -65,7 +65,6 @@ robot tests/suites/
 - **Python**
 - **Flask**
 - **Robot Framework**
-- **RequestsLibrary**
 
 ---
 
