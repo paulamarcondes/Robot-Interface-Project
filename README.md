@@ -8,15 +8,19 @@ This mini-project simulates interface API testing using a mock server built with
 
 ```
 robot-framework-interface-project/
-├── mock_server/
-│   ├── app.py              # Flask mock server
-│   └── requirements.txt    # Python dependencies
-├── tests/
-│   ├── resources/          # Robot test resources
-│   ├── suites/             # Robot test suites
-│   └── variables/          # (Optional) Variables
-├── README.md               # Project documentation
-└── .gitignore              # Ignore unnecessary files
+├── mock_server/            
+│   ├── app.py                          # Flask application code
+│   └── requirements.txt                # Python dependencies for the mock server
+├── robot_reports/ 
+├── tests/                  
+│   ├── resources/         
+│   │   ├── dispatch_keywords.robot     # Keywords
+│   │   └── dispatch_variables.robot    # Variables
+│   ├── negative_dispatch_tests.robot   # Negative test cases
+│   └── positive_dispatch_tests.robot   # Positive test cases
+├── README.md
+├── API_DOCUMENTATION.md
+└── .gitignore
 ```
 
 ---
